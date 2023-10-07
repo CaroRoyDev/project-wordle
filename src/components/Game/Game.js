@@ -17,7 +17,7 @@ function Game() {
   const [gameStatus, setGameStatus] = React.useState('running')
 
   const handleSubmitGuess = guessInput => {
-    if (gameStatus.isOver) return
+    if (gameStatus !== 'running') return
 
     const checkedLetters = checkGuess(guessInput, answer)
 
@@ -41,7 +41,7 @@ function Game() {
         <EndOfGameBanner gameStatus={gameStatus} answer={answer} guessCount={guesses.length} />
       )}
       <GuessesBoard guesses={guesses} />
-      <GuessInput onSubmitGuess={handleSubmitGuess} disabled={gameStatus.isOver} />
+      <GuessInput onSubmitGuess={handleSubmitGuess} disabled={gameStatus !== 'running'} />
     </>
   )
 }
