@@ -6,7 +6,8 @@ import GuessInput from '../GuessInput'
 import GuessesBoard from '../GuessesBoard'
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
 import { checkGuess } from '../../game-helpers'
-import EndOfGameBanner from '../EndOfGameBanner'
+import BannerLostGame from '../BannerLostGame'
+import BannerWonGame from '../BannerWonGame'
 // Pick a random word on every pageload.
 const answer = sample(WORDS)
 // To make debugging easier, we'll log the solution in the console.
@@ -29,17 +30,13 @@ function Game() {
     const nextGuesses = [...guesses, newGuess]
     setGuesses(nextGuesses)
 
-    if (checkedLetters.every(letter => letter.status === 'correct')) {
-      setGameStatus('won')
-      return
-    }
-    if (nextGuesses.length === NUM_OF_GUESSES_ALLOWED) setGameStatus('lost')
+    if (checkedLetters.every(letter => letter.status === 'correct')) setGameStatus('won')
+    else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) setGameStatus('lost')
   }
   return (
     <>
-      {gameStatus !== 'running' && (
-        <EndOfGameBanner gameStatus={gameStatus} answer={answer} guessCount={guesses.length} />
-      )}
+      {gameStatus === 'lost' && <BannerLostGame answer={answer} />}
+      {gameStatus === 'won' && <BannerWonGame guessCount={guesses.length} />}
       <GuessesBoard guesses={guesses} />
       <GuessInput onSubmitGuess={handleSubmitGuess} disabled={gameStatus !== 'running'} />
     </>
