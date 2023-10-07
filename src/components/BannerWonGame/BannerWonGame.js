@@ -4,7 +4,7 @@ import Banner from '../Banner'
 function BannerWonGame({ guessCount }) {
   return (
     <Banner variant='happy'>
-      Congratulations 🥳 Got it in {guessCount > 1 ? `${guessCount} guesses` : '1 guess'}
+      <p> Congratulations 🥳 Got it in {guessCount > 1 ? `${guessCount} guesses` : '1 guess'}</p>
     </Banner>
   )
 }
