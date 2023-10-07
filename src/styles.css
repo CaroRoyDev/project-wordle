@@ -180,6 +180,11 @@ h1 {
   will-change: transform;
 }
 
+.banner em {
+  font-style: normal;
+  font-weight: bold;
+}
+
 .happy.banner {
   background: var(--color-success);
   color: white;

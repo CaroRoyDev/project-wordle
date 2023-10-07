@@ -1,7 +1,7 @@
 import React from 'react'
 import { WORD_LENGTH } from '../../constants'
 
-function GuessInput({ onSubmitGuess }) {
+function GuessInput({ onSubmitGuess, disabled = false }) {
   const [input, setInput] = React.useState('')
 
   const handleChange = event => {
@@ -35,6 +35,7 @@ function GuessInput({ onSubmitGuess }) {
         maxLength={WORD_LENGTH}
         required
         title={`Please enter a ${WORD_LENGTH}-letter word, using only the letters A-Z.`}
+        disabled={disabled}
       />
     </form>
   )
