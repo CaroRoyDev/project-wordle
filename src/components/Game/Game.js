@@ -6,6 +6,7 @@ import GuessInput from '../GuessInput'
 import GuessesBoard from '../GuessesBoard'
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
 import { checkGuess } from '../../game-helpers'
+import EndOfGameBanner from '../EndOfGameBanner'
 // Pick a random word on every pageload.
 const answer = sample(WORDS)
 // To make debugging easier, we'll log the solution in the console.
@@ -15,7 +16,7 @@ function Game() {
   const [guesses, setGuesses] = React.useState([])
   const [gameStatus, setGameStatus] = React.useState({
     isOver: false,
-    won: false,
+    isWin: false,
   })
 
   const handleSubmitGuess = guessInput => {
@@ -32,7 +33,7 @@ function Game() {
     setGuesses(nextGuesses)
 
     if (checkedLetters.every(letter => letter.status === 'correct')) {
-      setGameStatus({ ...gameStatus, isOver: true, won: true })
+      setGameStatus({ ...gameStatus, isOver: true, isWin: true })
       return
     }
 
@@ -41,10 +42,11 @@ function Game() {
   }
   return (
     <>
-      {gameStatus.isOver && <p>Game finished : You {gameStatus.won ? 'won ! 🥳' : 'lost 😓 '}</p>}
-      {gameStatus.isOver && !gameStatus.won && <p>Answer was : {answer}</p>}
+      {gameStatus.isOver && (
+        <EndOfGameBanner isWin={gameStatus.isWin} answer={answer} guessCount={guesses.length} />
+      )}
       <GuessesBoard guesses={guesses} />
-      <GuessInput onSubmitGuess={handleSubmitGuess} />
+      <GuessInput onSubmitGuess={handleSubmitGuess} disabled={gameStatus.isOver} />
     </>
   )
 }
