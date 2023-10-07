@@ -7,7 +7,7 @@ function GuessesBoard({ guesses }) {
   return (
     <div className='guess-results'>
       {range(NUM_OF_GUESSES_ALLOWED).map((_, rowIndex) => (
-        <GuessRow key={rowIndex} guess={guesses[rowIndex]?.word} />
+        <GuessRow key={rowIndex} guess={guesses[rowIndex]} />
       ))}
     </div>
   )
