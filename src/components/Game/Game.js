@@ -67,6 +67,7 @@ function Game() {
   const handleResetGame = () => {
     setGuesses([])
     setGameStatus('running')
+    setKeysStatus(initialKeysStatus)
     setAnswer(sample(WORDS))
   }
 
