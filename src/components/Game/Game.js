@@ -8,6 +8,7 @@ import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
 import { checkGuess } from '../../game-helpers'
 import BannerLostGame from '../BannerLostGame'
 import BannerWonGame from '../BannerWonGame'
+import Keyboard from '../Keyboard'
 
 function Game() {
   const [answer, setAnswer] = React.useState(sample(WORDS))
@@ -24,7 +25,6 @@ function Game() {
       word: guessInput,
       checks: checkedLetters.map(({ status }) => status),
     }
-
     const nextGuesses = [...guesses, newGuess]
     setGuesses(nextGuesses)
 
@@ -52,6 +52,7 @@ function Game() {
       )}
       <GuessesBoard guesses={guesses} />
       <GuessInput onSubmitGuess={handleSubmitGuess} disabled={gameStatus !== 'running'} />
+      <Keyboard guesses={guesses} />
     </>
   )
 }

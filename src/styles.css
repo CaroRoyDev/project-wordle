@@ -239,3 +239,43 @@ h1 {
     transform: translateY(0%);
   }
 }
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 5px;
+  font-size: 1.5rem;
+}
+
+.keyboard_row {
+  display: flex;
+  column-gap: 5px;
+}
+
+.keyboard_key {
+  display: grid;
+  place-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--color-gray-900);
+}
+
+.keyboard_key.unused {
+  background: var(--color-gray-500);
+}
+
+.keyboard_key.incorrect {
+  background: var(--color-gray-100);
+}
+
+.keyboard_key.correct {
+  background: var(--color-success);
+}
+
+.keyboard_key.misplaced {
+  background: var(--color-warning);
+}
