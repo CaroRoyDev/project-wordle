@@ -1,31 +1,12 @@
 import React from 'react'
+import { QWERTY_ROWS } from '../../constants'
 
-const QWERTY_ROWS = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm']
-const initialKeysStatus = QWERTY_ROWS.reduce((acc, row) => {
-  row.split('').forEach(letter => {
-    acc[letter] = 'unused'
-  })
-  return acc
-}, {})
-
-function Keyboard({ guesses }) {
-  const keysStatus = guesses.reduce(
-    (acc, { word, checks }) => {
-      word.split('').forEach((letter, index) => {
-        acc[letter.toLowerCase()] = checks[index]
-      })
-      return acc
-    },
-    { ...initialKeysStatus }
-  )
-
-  console.log(keysStatus)
-
+function Keyboard({ keysStatus }) {
   return (
     <div className='keyboard'>
       {QWERTY_ROWS.map(row => (
         <div key={row} className='keyboard_row'>
-          {row.split('').map(letter => (
+          {row.map(letter => (
             <div key={letter} className={`keyboard_key ${keysStatus[letter]}`}>
               {letter}
             </div>
